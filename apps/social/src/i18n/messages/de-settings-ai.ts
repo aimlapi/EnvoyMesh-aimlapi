@@ -65,6 +65,7 @@ export const deAiSettingsMessages = {
     modelCustomId: "Custom model id…",
     apiKey: "API-Schlüssel",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "API-Schlüssel erhalten",
     saving: "Speichern…",
     saved: "Gespeichert!",
     saveProvider: "Anbieter speichern",

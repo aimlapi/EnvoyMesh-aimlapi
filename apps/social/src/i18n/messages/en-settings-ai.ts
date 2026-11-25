@@ -435,6 +435,7 @@ export const aiSettingsMessages = {
     modelCustomId: "Custom model id…",
     apiKey: "API key",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "Get an API key",
     saving: "Saving…",
     saved: "Saved!",
     saveProvider: "Save provider",

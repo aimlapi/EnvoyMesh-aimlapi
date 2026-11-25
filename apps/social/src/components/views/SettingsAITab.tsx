@@ -1900,6 +1900,13 @@ function ModelProviderSettings({
                   setModelApiKey(e.target.value);
                 }}
               />
+              {activePreset.apiKeyUrl ? (
+                <small>
+                  <a href={activePreset.apiKeyUrl} target="_blank" rel="noreferrer">
+                    {t("settings.ai.model.getApiKey")}
+                  </a>
+                </small>
+              ) : null}
             </dd>
           </>
         ) : null}

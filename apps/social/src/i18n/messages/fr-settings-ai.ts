@@ -65,6 +65,7 @@ export const frAiSettingsMessages = {
     modelCustomId: "Custom model id…",
     apiKey: "Clé API",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "Obtenir une clé API",
     saving: "Enregistrement…",
     saved: "Enregistré !",
     saveProvider: "Enregistrer le fournisseur",

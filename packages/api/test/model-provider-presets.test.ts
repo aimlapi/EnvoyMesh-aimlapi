@@ -205,3 +205,63 @@ describe("model-provider-presets", () => {
     )
   })
 })
+
+describe("AI/ML API preset", () => {
+  it("is a visible OpenAI-compatible preset on api.aimlapi.com", () => {
+    const preset = getModelProviderPreset("aimlapi")!
+    expect(preset.label).toBe("AI/ML API")
+    expect(preset.mode).toBe("openai-compatible")
+    expect(preset.defaultEndpoint).toBe("https://api.aimlapi.com/v1")
+    expect(preset.openclawApi).toBe("openai-completions")
+    expect(preset.apiKeyUrl).toBe("https://aimlapi.com/app/keys")
+    expect(preset.models[0]).toBe("openai/gpt-4o-mini")
+    expect(listModelProviderPresets({ includeLocal: false }).map((p) => p.id)).toContain(
+      "aimlapi",
+    )
+  })
+
+  it("infers the preset from the exact api.aimlapi.com host only", () => {
+    expect(
+      inferModelProviderPreset({
+        mode: "openai-compatible",
+        endpoint: "https://api.aimlapi.com/v1",
+      }).id,
+    ).toBe("aimlapi")
+    for (const endpoint of [
+      "https://api.aimlapi.com.evil.example/v1",
+      "https://evil-api.aimlapi.com/v1",
+      "https://aimlapi.com.attacker.test/v1",
+    ]) {
+      expect(
+        inferModelProviderPreset({ mode: "openai-compatible", endpoint }).id,
+      ).not.toBe("aimlapi")
+    }
+  })
+
+  it("resolveOpenClawModelConfig sends the key with the aimlapi base URL", () => {
+    const resolved = resolveOpenClawModelConfig({
+      mode: "openai-compatible",
+      presetId: "aimlapi",
+      modelName: "openai/gpt-4o-mini",
+      apiKey: "k",
+    })!
+    expect(resolved).toEqual({
+      providerId: "aimlapi",
+      model: "openai/gpt-4o-mini",
+      api: "openai-completions",
+      baseUrl: "https://api.aimlapi.com/v1",
+      apiKey: "k",
+    })
+  })
+
+  it("a saved AI/ML API endpoint never makes another provider look like aimlapi", () => {
+    // User switched the endpoint to OpenRouter: host wins, key is labelled for OpenRouter.
+    expect(
+      inferModelProviderPreset({
+        mode: "openai-compatible",
+        presetId: "aimlapi",
+        endpoint: "https://openrouter.ai/api/v1",
+      }).id,
+    ).toBe("openrouter")
+  })
+})

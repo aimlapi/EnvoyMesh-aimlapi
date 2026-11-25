@@ -65,6 +65,7 @@ export const jaAiSettingsMessages = {
     modelCustomId: "Custom model id…",
     apiKey: "API キー",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "API キーを取得",
     saving: "保存中…",
     saved: "保存しました！",
     saveProvider: "プロバイダーを保存",

@@ -64,6 +64,7 @@ export const koAiSettingsMessages = {
     modelCustomId: "Custom model id…",
     apiKey: "API 키",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "API 키 발급",
     saving: "저장 중…",
     saved: "저장됨!",
     saveProvider: "제공자 저장",

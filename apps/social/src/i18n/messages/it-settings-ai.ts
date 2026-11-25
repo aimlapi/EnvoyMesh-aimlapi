@@ -65,6 +65,7 @@ export const itAiSettingsMessages = {
     modelCustomId: "Custom model id…",
     apiKey: "Chiave API",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "Ottieni una chiave API",
     saving: "Salvataggio…",
     saved: "Salvato!",
     saveProvider: "Salva provider",

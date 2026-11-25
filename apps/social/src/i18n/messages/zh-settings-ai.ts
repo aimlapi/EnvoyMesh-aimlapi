@@ -70,6 +70,7 @@ export const zhAiSettingsMessages = {
     modelCustomId: "自定义模型 ID…",
     apiKey: "API 密钥",
     apiKeyPlaceholder: "sk-…",
+    getApiKey: "获取 API 密钥",
     saving: "保存中…",
     saved: "已保存！",
     saveProvider: "保存提供商",

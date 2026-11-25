@@ -792,6 +792,13 @@ export function SetupView({ waitingForNode = false }: { waitingForNode?: boolean
                           onChange={(e) => setModelApiKey(e.target.value)}
                           placeholder={t("settings.ai.model.apiKeyPlaceholder")}
                         />
+                        {activePreset.apiKeyUrl ? (
+                          <small>
+                            <a href={activePreset.apiKeyUrl} target="_blank" rel="noreferrer">
+                              {t("settings.ai.model.getApiKey")}
+                            </a>
+                          </small>
+                        ) : null}
                       </div>
                     </>
                   ) : null}

@@ -32,7 +32,13 @@ export interface ModelProviderPreset {
   localOnly?: boolean
   /** Hide when a real provider is required (mock / disabled stay available). */
   utility?: boolean
+  /** Where the user creates an API key for this provider (shown next to the key field). */
+  apiKeyUrl?: string
 }
+
+/** AI/ML API: OpenAI-compatible gateway (chat/completions, models) on a single host. */
+export const AIMLAPI_ENDPOINT = "https://api.aimlapi.com/v1"
+export const AIMLAPI_HOST = "api.aimlapi.com"
 
 /**
  * Ordered CN-first, then common cloud, then local + escape hatches.
@@ -282,6 +288,29 @@ export const MODEL_PROVIDER_PRESETS: readonly ModelProviderPreset[] = [
     endpointPlaceholder: "https://openrouter.ai/api/v1",
   },
   {
+    // Chat models from GET https://api.aimlapi.com/v1/models?include=all
+    // (type openai/chat-completions, with tools + vision + streaming).
+    // Any other model id from that catalog works as a custom id.
+    id: "aimlapi",
+    label: "AI/ML API",
+    mode: "openai-compatible",
+    defaultEndpoint: AIMLAPI_ENDPOINT,
+    models: [
+      "openai/gpt-4o-mini",
+      "openai/gpt-5-mini",
+      "anthropic/claude-sonnet-5-5",
+      "google/gemini-3-flash-preview",
+      "minimax/minimax-m3",
+      "alibaba/qwen3.7-plus",
+      "deepseek/deepseek-v4-flash",
+    ],
+    openclawProviderId: "aimlapi",
+    openclawApi: "openai-completions",
+    endpointEditable: true,
+    endpointPlaceholder: AIMLAPI_ENDPOINT,
+    apiKeyUrl: "https://aimlapi.com/app/keys",
+  },
+  {
     id: "ollama",
     label: "Ollama (local)",
     mode: "ollama",
@@ -426,6 +455,8 @@ function inferPresetFromHost(
     }
     if (host === "api.x.ai" || host.endsWith(".x.ai")) return getModelProviderPreset("xai")
     if (host.includes("openrouter.ai")) return getModelProviderPreset("openrouter")
+    // Exact host only: a look-alike (api.aimlapi.com.example) must not map here.
+    if (host === AIMLAPI_HOST) return getModelProviderPreset("aimlapi")
     if (host === "api.openai.com" || host.endsWith(".openai.com")) {
       return getModelProviderPreset("openai")
     }
