@@ -25,8 +25,12 @@ type LocationChoice = "auto" | "skip";
 
 const MIN_INTERESTS = 3;
 
-/** First-run default — matches Settings → AI CN-first ordering. */
-const DEFAULT_SETUP_PRESET_ID = "minimax-cn";
+/**
+ * Provider pre-selected when a new user picks "Configure AI" in first-run setup.
+ * Only affects the wizard's initial form state; saved `modelProviders` are never
+ * touched, and every other preset stays one click away in the same picker.
+ */
+export const DEFAULT_SETUP_PRESET_ID = "aimlapi";
 
 const DEFAULT_SETUP_NETWORK_PRESET: NetworkPresetId = "explore-public";
 
