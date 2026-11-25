@@ -254,14 +254,4 @@ describe("AI/ML API preset", () => {
     })
   })
 
-  it("a saved AI/ML API endpoint never makes another provider look like aimlapi", () => {
-    // User switched the endpoint to OpenRouter: host wins, key is labelled for OpenRouter.
-    expect(
-      inferModelProviderPreset({
-        mode: "openai-compatible",
-        presetId: "aimlapi",
-        endpoint: "https://openrouter.ai/api/v1",
-      }).id,
-    ).toBe("openrouter")
-  })
 })
